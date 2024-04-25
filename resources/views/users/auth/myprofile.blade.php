@@ -10,21 +10,21 @@
     }
 
     .container {
-        margin: 5rem auto; /* Center the form and add margin from top */
+        margin: 2rem auto; /* Center the form vertically */
         padding: 20px; /* Add padding from all sides */
         max-width: 500px; /* Limit the form width */
-        background-color: #fff;; /* Set blue background for the form */
+        background-color: #fff; /* Set blue background for the form */
         color: #fff; /* Set text color to white */
         border-radius: 10px; /* Add border radius for rounded corners */
     }
 
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom:5px;
     }
 
     h1 {
         text-align: center; /* Center align the heading */
-        padding: 10px; /* Add padding for the heading */
+        padding: 5px; /* Add padding for the heading */
         background-color: #0056b3; /* Darker blue background for the heading */
         border-radius: 5px; /* Add border radius for rounded corners */
     }

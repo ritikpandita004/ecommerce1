@@ -74,6 +74,7 @@
         cursor: pointer;
         font-size: 14px;
         transition: background-color 0.3s ease;
+        text-decoration: none; /* Remove underline from links */
     }
 
     .add-to-cart-btn:hover {
@@ -84,26 +85,28 @@
 <h1 class="sales-heading" style="font-weight: bold; text-align: center; margin-top: 20px; margin-bottom: 30px; font-size: 40px; background: linear-gradient(45deg, #007bff, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Products</h1>
 
 
-<div class="container-fluid" style="background-color: #fff;"> <!-- Set background color of the container to white -->
+<div class="container-fluid">
     <div class="row">
         @foreach ($data as $product)
         <div class="col-md-3 mb-4">
-            <div class="card custom-card">
-                <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}">
-                <div class="card-body product-info">
-                    <h5 class="card-title product-name">{{ $product->productname }}</h5>
-                    <p class="card-text product-description">{{ $product->productdescription }}</p>
-                    <p class="card-text price">${{ $product->price }}</p>
-                    <form action="{{ route('storeCart') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="p_id" value="{{ $product->id }}">
-                        <button type="submit" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
-                    </form>
+            
+            <a href="{{ route('userProductDetail', ['id' => $product->id]) }}" class="product-link" style="text-decoration: none;"> 
+                <div class="card custom-card">
+                    <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                    <div class="card-body product-info">
+                        <h5 class="card-title product-name">{{ $product->productname }}</h5>
+                        <p class="card-text product-description">{{ $product->productdescription }}</p>
+                        <p class="card-text price">${{ $product->price }}</p>
+                        {{-- <form action="{{ route('storeCart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="p_id" value="{{ $product->id }}">
+                            <button type="submit" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                        </form> --}}
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         @endforeach
     </div>
 </div>
-
 @include('users/commons/footer')

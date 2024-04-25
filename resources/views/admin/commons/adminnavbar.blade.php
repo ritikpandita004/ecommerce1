@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Navbar</title>
+    <title>Ekart</title>
     <style>
         body {
             margin: 0;
@@ -56,7 +56,7 @@
             display: none;
             position: absolute;
             background-color: #333; /* Dark gray dropdown background */
-            min-width: 200px;
+            min-width: 150px; /* Reduced width */
             z-index: 1;
         }
 
@@ -77,6 +77,28 @@
         .dropdown-menu li a:hover {
             background-color: #555; 
         }
+
+
+        .navbar select {
+            background-color: #000; /* Dark black navbar */
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .navbar select:hover {
+            background-color: #333; /* Darker black on hover */
+        }
+
+        .navbar select option {
+            background-color: #333; /* Darker black for options */
+        }
+
+        .navbar select option:hover {
+            background-color: #555; /* Even darker black on hover */
+        }
     </style>
     
 </head>
@@ -88,7 +110,7 @@
         </div>
         <ul>
             <li><a href="/homepage">Home</a></li>
-            <li>
+            <li class="dropdown">
                 <select onchange="location = this.value;">
                     <option value="#">Category</option>
                     <option value="{{ route('createcategory') }}">Add Category</option>
@@ -96,14 +118,14 @@
                     <!-- Add more categories if needed -->
                 </select>
             </li>
-            <li>
+            <li class="dropdown">
                 <select onchange="location = this.value;">
                     <option value="#">Brand</option>
                     <option value="/createbrand">Add Brand</option>
                     <!-- Add more brand options if needed -->
                 </select>
             </li>
-            <li>
+            <li class="dropdown">
                 <select onchange="location = this.value;">
                     <option value="#">Products</option>
                     <option value="{{ route('CreateProduct') }}">Add a new Product</option>
@@ -111,6 +133,7 @@
                     <!-- Add more product options if needed -->
                 </select>
             </li>
+            <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
     </nav>
     

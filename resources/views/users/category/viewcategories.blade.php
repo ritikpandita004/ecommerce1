@@ -95,7 +95,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$category->name}}</h5>
                 <p class="card-text">{{$category->categoryDescription}}</p>
-                <a href="/productuser" class="btn btn-primary">Explore</a>
+                <a href="{{ route('catproductview', ['category_id' => $category->id]) }}" class="btn btn-primary">Explore</a>
             </div>
         </div>
         @endforeach

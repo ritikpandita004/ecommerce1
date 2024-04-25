@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">{{ __('Email address') }}</label>
-                            <input type="email" class="form-control" id="email" placeholder="{{ __('Enter your email') }}" name="email" required value="{{$data->email}}">
+                            <input type="email" class="form-control" id="email" placeholder="{{ __('Enter your email') }}" name="email" required value="{{$data->email}}" readonly> <!-- Add readonly attribute here -->
                         </div>
                         <div class="form-group">
                             <label for="phone">{{ __('Phone Number') }}</label>
@@ -86,6 +86,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    // Function to display a message when the email field is clicked
+    function displayMessage() {
+        alert("You cannot edit the email");
+    }
+</script>
 
 @include('users/commons/footer')

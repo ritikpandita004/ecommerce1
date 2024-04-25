@@ -16,12 +16,31 @@
       background-color: #f0f0f0;
     }
 
+    .container {
+      text-align: center;
+    }
+
     .success-message {
       background-color: #4caf50;
       color: #fff;
       padding: 10px 20px;
       border-radius: 5px;
       text-align: center;
+    }
+
+    .login-button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .login-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -31,7 +50,7 @@
           <h2>Registration Successful!</h2>
           <p>Thank you for registering. You can now access all our features.</p>
         </div>
-      </div>
-    
+        <a href="{{route('login')}}" class="login-button mt-5">Login</a>
+    </div>
 </body>
 </html>

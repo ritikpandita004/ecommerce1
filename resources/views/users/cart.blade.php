@@ -145,96 +145,92 @@
         .checkout-btn:hover, .continue-btn:hover {
             background-color: #ddb347;
         }
+
+       
+    /* Add this CSS to style the "No Products found" message */
+    .no-products {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+        color: #555;
+        margin: 0 auto; /* Center horizontally */
+        margin-bottom: 20px;
+    }
     </style>
 </head>
 <body>
-    
-     
-   
     <main>
         <section class="cart-items">
+            @if(count($userCartItems) > 0)
             @foreach($userCartItems as $details)
-            <div class="item" data-product-id="1">
-                <img src="{{asset($details->image)}}" alt="Product Image">
-                <div class="item-details">
-                    <h2>{{$details->p_name}}</h2>
-                    <p>Price: {{$details->p_price}}</p>
-                    <div class="quantity-selector">
-                        <button class="decrease-btn">-</button>
-                        <span class="quantity-display">1</span>
-                        <button class="increase-btn">+</button>
-                    </div>
-                    
-
-                    <a href="/cartremove? id={{$details->id}}" class="remove-btn">Remove</a>
-
-                </div>
-            </div>
-            @endforeach
-            {{-- @foreach($userCartItems as $details)
             <div class="item" data-product-id="{{ $details->p_id }}">
                 <img src="{{ asset($details->image) }}" alt="Product Image">
                 <div class="item-details">
                     <h2>{{ $details->p_name }}</h2>
                     <p>Price: {{ $details->p_price }}</p>
                     <div class="quantity-selector">
-                        <form action="/updatecart" method="POST">
+                        <form action="{{route('deleteQuantity')}}" method="POST">
                             @csrf
                             <input type="hidden" name="p_id" value="{{ $details->p_id }}">
-                            <button type="submit" name="decrease" class="decrease-btn">-</button>
-                            <span class="quantity-display">{{ $details->qty }}</span>
-                            <button type="submit" name="increase" class="increase-btn">+</button>
+                            <input type="hidden" name="u_id" value="{{ $details->u_id }}">
+                           
+                            <button type="submit" name="decrease"  id="decrease"  class="decrease-btn">-</button>
+                           
+                            <input type="hidden" name="qty" value="{{ $details->qty }}">
+
+                       
                         </form>
+                        <span class="quantity-display">{{ $details->qty }}</span>
+                        <form action="{{route('updatequantity')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="p_id" value="{{ $details->p_id }}">
+                            <input type="hidden" name="u_id" value="{{ $details->u_id }}">
+                           
+                            
+                         
+                            <input type="hidden" name="qty" value="{{ $details->qty }}">
+                            <button type="submit" name="increase" id="increase" class="increase-btn">+</button>
+                        </form>
+                       
                     </div>
                     <a href="/cartremove?id={{ $details->id }}" class="remove-btn">Remove</a>
                 </div>
             </div>
-            @endforeach --}}
+            @endforeach
+            @else
+            <div class="no-products">
+                No Products found
+            </div>
+            @endif
         </section>
             <section class="cart-summary">
                 <h2>Cart Summary</h2>
-                <p class="subtotal">Subtotal: $0.00</p>
-                <p class="tax">Tax: $0.00</p>
-                <p class="total">Total: $0.00</p>
+                <p class="subtotal">Subtotal: 0.00</p>
+                <p class="tax">Tax: 0.00</p>
+                <p class="total">Total: 0.00</p>
+                <button class="error-message" style="color: red; display: none; background-color: transparent; border: 2px solid red; padding: 10px; cursor: pointer;">Please add a product to checkout.</button>
                 <!-- Hidden input fields for sending data to the checkout endpoint -->
                 <input type="hidden" name="subtotal" value="0.00">
                 <input type="hidden" name="tax" value="0.00">
                 <input type="hidden" name="total" value="0.00">
                 
-                <a href="/placeorder" class="checkout-btn">Checkout</a>
+                <a href="/shipment" class="checkout-btn">Checkout</a>
               
                 <a href="{{ route('userproduct') }}" class="continue-btn">Continue Shopping</a>
             </section>
     
         
     </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const decreaseButtons = document.querySelectorAll('.decrease-btn');
-            const increaseButtons = document.querySelectorAll('.increase-btn');
-            const quantityDisplays = document.querySelectorAll('.quantity-display');
             const subtotalElement = document.querySelector('.subtotal');
             const taxElement = document.querySelector('.tax');
             const totalElement = document.querySelector('.total');
-
-            decreaseButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    const currentValue = parseInt(quantityDisplays[index].textContent);
-                    if (currentValue > 1) {
-                        quantityDisplays[index].textContent = currentValue - 1;
-                        updateSummary();
-                    }
-                });
-            });
-
-            increaseButtons.forEach((button, index) => {
-                button.addEventListener('click', () => {
-                    const currentValue = parseInt(quantityDisplays[index].textContent);
-                    quantityDisplays[index].textContent = currentValue + 1;
-                    updateSummary();
-                });
-            });
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            const errorMessage = document.querySelector('.error-message');
 
             function updateSummary() {
                 let subtotal = 0;
@@ -247,15 +243,25 @@
                 const tax = subtotal * taxRate;
                 const total = subtotal + tax;
 
-                subtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
-                taxElement.textContent = `Tax: $${tax.toFixed(2)}`;
-                totalElement.textContent = `Total: $${total.toFixed(2)}`;
+                subtotalElement.textContent = `Subtotal: ${subtotal.toFixed(2)}`;
+                taxElement.textContent = `Tax: ${tax.toFixed(2)}`;
+                totalElement.textContent = `Total: ${total.toFixed(2)}`;
+
+                // Display error message if total is 0
+                if (total === 0) {
+                    errorMessage.style.display = 'block';
+                    checkoutBtn.style.display = 'none';
+                } else {
+                    errorMessage.style.display = 'none';
+                    checkoutBtn.style.display = 'block';
+                }
             }
 
             // Initial update of summary on page load
             updateSummary();
         });
     </script>
+    
     
 </body>
 </html>
