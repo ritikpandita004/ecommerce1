@@ -35,4 +35,12 @@ class QueryController extends Controller
         $query->save();
         return view('users/querysubmitted');
     }
+
+
+
+    public function viewQueryInAdmin()
+    {
+        $queries = queries::all();
+        return view('admin/querylist',compact('queries'));
+}
 }

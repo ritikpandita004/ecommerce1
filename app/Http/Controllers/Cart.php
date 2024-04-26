@@ -22,7 +22,7 @@ class Cart extends Controller
             $existingProduct->qty += 1;
             $existingProduct->subtotal = $productPrice * $existingProduct->qty;
             $existingProduct->tax = $existingProduct->subtotal * 0.1;
-            $existingProduct->total = $existingProduct->subtotal + $existingProduct->tax; // 
+            $existingProduct->total = $existingProduct->subtotal + $existingProduct->tax; 
             $existingProduct->save();
         } else {
 

@@ -28,17 +28,32 @@ class Razorpay extends Controller
     {
         $userCartItems = usercart::where('u_id', session('id'))->get();
         $totalAmount = 0;
-
+        $productIds = []; 
         foreach ($userCartItems as $cartItem) {
             $product = products::find($cartItem->p_id);
-            // Ensure product exists
+            
+         
+            //initilize product id array
+            $productIds[] = $cartItem->p_id;
+            $userId= $cartItem->u_id;
+          
+
             if ($product) {
                 // Calculate total amount based on product price, tax, and quantity
                 $totalAmount += ($product->price * 1.1) * $cartItem->qty; // Adding 10% tax
+               
+                // add each product id in an array
             }
-        }
 
-        // Generate order ID
+            //set product id's array in session 
+           
+        }
+        Session::put('product_ids', $productIds);
+        Session::put('user_id', $userId);
+        Session::put('total_amount', $totalAmount);
+        
+       
+        //Generate order ID
         $orderid = rand(111111, 999999);
         // Prepare order data for Razorpay
         $orderData = [
@@ -50,6 +65,7 @@ class Razorpay extends Controller
             ]
         ];
         // Create Razorpay order
+
         $razorpayOrder = $this->api->order->create($orderData);
         // Pass Razorpay order to view
         return view('users.razorpayscript', compact('razorpayOrder'));
@@ -67,19 +83,39 @@ class Razorpay extends Controller
        
             usercart::truncate();
          }
+         $product_ids=[];
+         $user_id = session('user_id');
 
-        //create new entry in orders table
+        
+         if (!$user_id) {
+             
+             return redirect()->route("login")->with('error', 'User ID is missing. Please log in.');
+         }
+        if (Session::has('product_ids')) {
+            $product_ids = session('product_ids');
+            
+        }
+        
 
-        //  $orderDetails=new Order;
-        //  $orderDetails->u_id=Session::get('id');
-        //  $orderDetails->p_id=$request
+      
+        //clear product id's array from session
+
+
+         
         Session::put('isFromCart', false);
-        //save in order table
-        //pid,uid,shipid
+      
+     
+         $orders=new Order;
+         $orders->u_id=  Session::get('user_id');
+         $orders->p_id= json_encode( $product_ids);
+         $orders->s_id=  session('shipment_ids');
+         $orders->amount=  session('total_amount');
+         
+         $orders->save();
+         Session::forget(['product_ids', 'total_amount', 'shipment_ids']);
             return view('users/ordersuccess');
         } else {
-//save in order table
-        //pid,uid,shipid
+
          Session::put('isFromCart', false);
             return redirect()->route("payments")->with('payment failed');
         }
@@ -131,8 +167,16 @@ class Razorpay extends Controller
     $shipment->email = $request->email;
 
     $savedShipment = $shipment->save();
-
     
+    if ($savedShipment) {
+        // If the shipment was saved successfully, get its ID
+        $shipment_id = $shipment->id;
+   
+        // Store the shipment ID in a session variable
+        Session::put('shipment_ids', $shipment_id);
+    
+        // Now you can use $shipment_id as needed
+    } 
 
     $totalAmount = 0;
 
@@ -155,6 +199,7 @@ class Razorpay extends Controller
             'order_id' => $orderId,
         ]
     ];
+    //add signle product id in array and set in session
 
     // Create Razorpay order
     $razorpayOrder = $this->api->order->create($orderData);

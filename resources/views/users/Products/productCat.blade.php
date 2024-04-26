@@ -86,14 +86,17 @@
 <div class="card-container">
     @foreach ($products as $item)
     <div class="card custom-card">
-        <img src="{{ asset($item->image) }}" class="card-img-top" alt="{{ $item->name }}">
-        <div class="product-info">
-            <h5 class="product-name">{{ $item->productname }}</h5>
-            <p class="product-description">{{ $item->productdescription }}</p>
-            <p class="price"><strong>Price:</strong> ${{ $item->price }}</p>
-            <a href="{{ route('storeCart') }}" class="add-to-cart-btn">Add to Cart</a>
-        </div>
+        <a href="{{ route('userProductDetail', ['id' => $item->id]) }}" class="product-link" style="text-decoration: none;"> 
+            <img src="{{ asset($item->image) }}" class="card-img-top" alt="{{ $item->name }}">
+            <div class="product-info">
+                <h5 class="product-name">{{ $item->productname }}</h5>
+                <p class="product-description">{{ $item->productdescription }}</p>
+                <p class="price"><strong>Price:</strong> ${{ $item->price }}</p>
+            </div>
+        </a>
+       
     </div>
+    
     @endforeach
 </div>
 @include('users/commons/footer')

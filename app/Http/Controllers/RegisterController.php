@@ -38,19 +38,19 @@ $validator = Validator::make($request->all(), [
         'min:8',
         'confirmed',
         function ($attribute, $value, $fail) {
-            $errors = [];
+           $errors = [];
 
-            if (!preg_match('/[A-Z]/', $value)) {
-                $errors[] = 'The password must contain at least one uppercase letter.';
-            }
-            
-            if (!preg_match('/[^\w\d\s]/', $value)) {
-                $errors[] = 'The password must contain at least one unique character.';
-            }
-            
-            if (!empty($errors)) {
-                $fail($errors);
-            }
+if (!preg_match('/[A-Z]/', $value)) {
+    $errors[] = 'The password must contain at least one uppercase letter.';
+}
+
+if (!preg_match('/[^\w\d\s]/', $value)) {
+    $errors[] = 'The password must contain at least one unique character.';
+}
+
+if (!empty($errors)) {
+    $fail($errors);
+}
         }
     ],
 ], [
@@ -62,7 +62,7 @@ $validator = Validator::make($request->all(), [
     'name.string' => 'The name must be a string.',
     'name.regex' => 'The name cannot contain numbers.',
     'phoneNumber.required' => 'The phone number field is required.',
-    'phoneNumber.numeric' => 'The phone number must be numeric.',
+    'phoneNumber.numeric' => 'The phone number must be number.',
     'phoneNumber.digits_between' => 'The phone number must be of 10 digits.',
     'password.confirmed' => 'The password and confirm password do not match.',
     'password.min' => 'The password must be at least :min characters.'

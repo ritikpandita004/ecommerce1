@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -52,55 +53,48 @@
         }
 
         /* Dropdown Styles */
-        .dropdown-menu {
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .profile-icon {
+            font-size: 24px;
+            color: white; /* Human icon color set to white */
+            border-radius: 50%; /* Make it a circle */
+            background-color:black; /* Background color behind the icon */
+            padding: 10px; /* Adjust padding */
+        }
+
+        .profile-dropdown-content {
             display: none;
             position: absolute;
-            background-color: #333; /* Dark gray dropdown background */
-            min-width: 150px; /* Reduced width */
+            background-color: #333;
+            min-width: 160px;
             z-index: 1;
+            top: calc(100% + 10px); /* Adjusted top position */
+            right: 0; /* Align dropdown content with the right edge of the profile icon */
+            border-radius: 5px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         }
 
-        .dropdown:hover .dropdown-menu {
+        .profile-dropdown:hover .profile-dropdown-content {
             display: block;
         }
 
-        .dropdown-menu li {
-            display: block;
-        }
-
-        .dropdown-menu li a {
-            padding: 10px 20px;
+        .profile-dropdown-content a {
             color: white;
             text-decoration: none;
+            display: block;
+            padding: 10px 20px;
         }
 
-        .dropdown-menu li a:hover {
-            background-color: #555; 
-        }
-
-
-        .navbar select {
-            background-color: #000; /* Dark black navbar */
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        .navbar select:hover {
-            background-color: #333; /* Darker black on hover */
-        }
-
-        .navbar select option {
-            background-color: #333; /* Darker black for options */
-        }
-
-        .navbar select option:hover {
-            background-color: #555; /* Even darker black on hover */
+        .profile-dropdown-content a:hover {
+            background-color: #555;
         }
     </style>
-    
 </head>
 <body>
     <nav class="navbar">
@@ -133,9 +127,14 @@
                     <!-- Add more product options if needed -->
                 </select>
             </li>
-            <li><a href="{{ route('logout') }}">Logout</a></li>
+            <li class="profile-dropdown">
+                <i class="fas fa-user profile-icon"></i> <!-- Human icon -->
+                <div class="profile-dropdown-content">
+                    <a href="{{ route('queries') }}">Queries</a>
+                    <a href="{{ route('logout') }}">Logout</a>
+                </div>
+            </li>
         </ul>
     </nav>
-    
 </body>
 </html>

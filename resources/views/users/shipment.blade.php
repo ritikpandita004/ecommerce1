@@ -124,6 +124,7 @@
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" value="{{ old('email') }}" required>
         </div>
+        
         <button type="submit" class="btn-submit">Submit</button>
     </form>
 </div>

@@ -149,16 +149,17 @@
        
     /* Add this CSS to style the "No Products found" message */
     .no-products {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        max-width: 800px;
-        width: 100%;
-        text-align: center;
-        color: #555;
-        margin: 0 auto; /* Center horizontally */
-        margin-bottom: 20px;
-    }
+    background-color: yellow; /* Change background color to yellow */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    color: #555;
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 20px;
+}
+
     </style>
 </head>
 <body>
@@ -211,7 +212,8 @@
                 <p class="subtotal">Subtotal: 0.00</p>
                 <p class="tax">Tax: 0.00</p>
                 <p class="total">Total: 0.00</p>
-                <button class="error-message" style="color: red; display: none; background-color: transparent; border: 2px solid red; padding: 10px; cursor: pointer;">Please add a product to checkout.</button>
+                <button class="error-message" style="color: black; display: none; background-color: yellow; border: 2px solid yellow; padding: 10px; cursor: pointer;">Please add a product to checkout.</button>
+
                 <!-- Hidden input fields for sending data to the checkout endpoint -->
                 <input type="hidden" name="subtotal" value="0.00">
                 <input type="hidden" name="tax" value="0.00">

@@ -116,6 +116,7 @@
             <li class="profile-dropdown">
                 <i class="fas fa-user profile-icon"></i> <!-- Human icon -->
                 <div class="profile-dropdown-content">
+                    <a href="{{ route('orders') }}">Your Orders</a>
                     <a href="{{ route('myProfile') }}">View Profile</a>
                     <a href="{{ route('logout') }}">Logout</a>
                 </div>

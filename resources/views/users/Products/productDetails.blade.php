@@ -30,7 +30,7 @@
             flex-wrap: wrap;
         }
 
-        .product img {
+   .product img {
     width: 300px; /* Fixed width */
     height: auto; /* Automatically adjust height to maintain aspect ratio */
     margin-bottom: 20px;
@@ -48,7 +48,7 @@
 
         .product-info h2 {
             margin-top: 0;
-            color: #333;
+            color: rgba(0, 0, 0, 0.842) !important;
         }
 
         .product-info p {

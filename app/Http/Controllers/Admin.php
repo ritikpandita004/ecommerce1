@@ -23,18 +23,40 @@ class Admin extends Controller
     }
 
 
+
     public function adminLogin(Request $request)
     {
-
-        $admin = adminLLogin::where('username', $request["email"])->first();
-        if ($admin->username == $request->email && $admin->password == md5($request->password)) {
-            return redirect("homepage");
-        } else {
-
-            return view("admin/auth/admin");
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'password.required' => 'The password field is required.',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        try {
+            $admin = adminLLogin::where('username', $request->email)->firstOrFail();
+            
+            if ($admin->username == $request->email && $admin->password == md5($request->password)) {
+                return redirect("homepage");
+            } else {
+                return redirect()->back()->with('error', 'Invalid username or password.');
+            }
+        } catch (\Exception $e) {
+            // Log the error or handle it appropriately
+            return redirect()->back()->with('error', 'You are not authorize to access admin. Please login as a user');
         }
     }
+    
 
+
+
+    
 
 
     public function createCategory()
@@ -154,12 +176,14 @@ class Admin extends Controller
             $product->category = $request->category;
             $product->brand = $request->brand;
             $product->productdescription = $request->description;
+           
             $image = $request->file('image');
             if ($image) {
                 $imageName = time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('images'), $imageName);
                 $product->image = 'images/' . $imageName;
                 $product->price = $request->price;
+               
                 $product->save();
                 return redirect("/viewproducts");
             }
