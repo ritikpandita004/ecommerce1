@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use PhpParser\Node\Stmt\TryCatch;
 
+
+use Illuminate\Support\Facades\Redirect;
 class Admin extends Controller
 {
     public function adminLoginView()
@@ -68,12 +70,33 @@ class Admin extends Controller
 
     public function storeCategory(Request $request)
     {
+        $validatedData = Validator::make($request->all(), [
+            'categoryName' => 'required|regex:/^[^\d]+$/|max:255',
+            'categoryDescription' => 'required|string',
+            'categoryImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+         
+        ], [
+            'categoryName.required' => 'Please enter the a valid category name ',
+            'categoryName.regex' => 'The category name must not contain numbers.',
+            'categoryName.max' => 'The category name must not exceed 255 characters.',
+            'categoryDescription.required' => 'Please enter a valid category description.',
+            'categoryDescription.string' => 'The description must be a string.',
+            'categoryImage.required' => 'Please select an image for the category.',
+            'categoryImage.image' => 'The selected file must be an image.',
+            'categoryImage.mimes' => 'Only JPG, PNG, JPEG, and GIF files are allowed for the image.',
+            'categoryImage.max' => 'The image must not exceed 2MB in size.',
+        ]);
+        if ($validatedData->fails()) {
+            return redirect('/create')
+                ->withErrors($validatedData)
+                ->withInput();
+        }
+
         $categories = new Category();
         $categories->name = $request->categoryName;
         $categories->categoryDescription = $request->categoryDescription;
         $image = $request->file('categoryImage');
 
-        // Ensure the file is present and valid
         if ($image) {
             // Generate a unique name for the image
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -147,7 +170,7 @@ class Admin extends Controller
                 'brand' => 'required',
                 'description' => 'required|string',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'price' => 'required|numeric',
+                'price' => 'required|numeric|min:1',
             ], [
                 'productName.required' => 'Please enter the product name.',
                 // 'productName.regex' => 'The product name must not contain numbers.',
@@ -162,7 +185,8 @@ class Admin extends Controller
                 'image.mimes' => 'Only JPG, PNG, JPEG, and GIF files are allowed for the image.',
                 'image.max' => 'The image must not exceed 2MB in size.',
                 'price.required' => 'Please enter the price of the product.',
-                'price.numeric' => 'The price must be a numeric value.',
+                'price.numeric' => 'The price must be a number.',
+                'price.min' => 'The price must be greater than 0.',
             ]);
 
             if ($validatedData->fails()) {
@@ -205,7 +229,10 @@ class Admin extends Controller
 
     public function Logout(Request $request)
     {
-        Session::forget('user');
+        Auth::logout();
+        Session::flush();
+        Redirect::back();
+           Cache::flush();
         return view("users/auth/login");
     }
 }

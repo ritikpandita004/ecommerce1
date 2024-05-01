@@ -29,28 +29,28 @@ class Razorpay extends Controller
         $userCartItems = usercart::where('u_id', session('id'))->get();
         $totalAmount = 0;
         $productIds = []; 
+        $userId = null; 
+    
         foreach ($userCartItems as $cartItem) {
             $product = products::find($cartItem->p_id);
+            $quantity=$cartItem->qty;
             
-         
-            //initilize product id array
-            $productIds[] = $cartItem->p_id;
-            $userId= $cartItem->u_id;
-          
-
-            if ($product) {
-                // Calculate total amount based on product price, tax, and quantity
-                $totalAmount += ($product->price * 1.1) * $cartItem->qty; // Adding 10% tax
-               
-                // add each product id in an array
+            for ($i = 0; $i < $quantity; $i++) {
+                $productIds[] = $cartItem->p_id;
             }
-
-            //set product id's array in session 
-           
+            $userId = $cartItem->u_id;
+    
+            if ($product) {
+             
+                $totalAmount += ($product->price * 1.1) * $cartItem->qty; 
+            }
         }
+    
+        // Store product ids, user id, and total amount in session
         Session::put('product_ids', $productIds);
         Session::put('user_id', $userId);
         Session::put('total_amount', $totalAmount);
+        
         
        
         //Generate order ID
@@ -84,35 +84,35 @@ class Razorpay extends Controller
             usercart::truncate();
          }
          $product_ids=[];
-         $user_id = session('user_id');
-
+         $user_id =  Session::get('id');
+       
         
          if (!$user_id) {
              
              return redirect()->route("login")->with('error', 'User ID is missing. Please log in.');
          }
         if (Session::has('product_ids')) {
-            $product_ids = session('product_ids');
-            
+            $product_ids = Session::get('product_ids');
+          
         }
         
 
       
         //clear product id's array from session
 
-
+        Session::forget('product_ids');
          
         Session::put('isFromCart', false);
       
      
          $orders=new Order;
-         $orders->u_id=  Session::get('user_id');
+         $orders->u_id=  Session::get('id');
          $orders->p_id= json_encode( $product_ids);
          $orders->s_id=  session('shipment_ids');
-         $orders->amount=  session('total_amount');
+         $orders->amount= Session::get('total_amount');
          
          $orders->save();
-         Session::forget(['product_ids', 'total_amount', 'shipment_ids']);
+                  Session::forget(['product_ids', 'user_id', 'total_amount', 'shipment_ids']);
             return view('users/ordersuccess');
         } else {
 
@@ -187,6 +187,10 @@ class Razorpay extends Controller
             // Calculate total amount based on product price, tax, and quantity
             $totalAmount += ($product->price * 1.1); // Adding 10% tax
         }
+     
+        $productIds[] =$product->id;
+        Session::put('total_amount', $totalAmount);
+        Session::put('product_ids', $productIds);
         // Generate order ID (consider using a more robust method)
     $orderId = rand(111111, 999999);
 

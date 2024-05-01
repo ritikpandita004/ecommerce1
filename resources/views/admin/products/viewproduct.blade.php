@@ -66,7 +66,7 @@
                     <div class="product-info">
                         <h6 class="product-name">{{ $product->productname }}</h6>
                         <p class="product-description">{{ $product->productdescription }}</p>
-                        <p class="product-price">Price: ${{ $product->price }}</p>
+                        <p class="product-price">Price: {{ $product->price }}</p>
                     </div>
                 </div>
             </div>

@@ -149,7 +149,7 @@
        
     /* Add this CSS to style the "No Products found" message */
     .no-products {
-    background-color: yellow; /* Change background color to yellow */
+    background-color: #f0c14b; /* Change background color to yellow */
     border-radius: 8px;
     padding: 20px;
     max-width: 800px;
@@ -165,6 +165,7 @@
 <body>
     <main>
         <section class="cart-items">
+          
             @if(count($userCartItems) > 0)
             @foreach($userCartItems as $details)
             <div class="item" data-product-id="{{ $details->p_id }}">
@@ -212,7 +213,7 @@
                 <p class="subtotal">Subtotal: 0.00</p>
                 <p class="tax">Tax: 0.00</p>
                 <p class="total">Total: 0.00</p>
-                <button class="error-message" style="color: black; display: none; background-color: yellow; border: 2px solid yellow; padding: 10px; cursor: pointer;">Please add a product to checkout.</button>
+                <button class="error-message" style="color: black; display: none; background-color:  #f0c14b; border: 2px solid  #f0c14b; padding: 10px; cursor: pointer;">Please add a product to checkout.</button>
 
                 <!-- Hidden input fields for sending data to the checkout endpoint -->
                 <input type="hidden" name="subtotal" value="0.00">

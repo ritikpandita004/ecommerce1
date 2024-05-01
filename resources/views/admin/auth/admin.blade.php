@@ -62,7 +62,7 @@
                 </div>
             @endif
                 <div class="form-group">
-                    <label for="email">Username:</label>
+                    <label for="email">Email:</label>
                     <input type="text" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">

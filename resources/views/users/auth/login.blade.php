@@ -72,6 +72,7 @@
                     
                     <a href="register" class="btn btn-primary btn-block mt-2">Register yourself</a>
                     <a href="/adminlogin" class="btn btn-primary btn-block mt-2">Admin login</a>
+                    {{-- <a href="/adminlogin" class="btn btn-primary btn-block mt-2">Forgotpaswsword</a> --}}
                 </div>
             </div>
         </div>

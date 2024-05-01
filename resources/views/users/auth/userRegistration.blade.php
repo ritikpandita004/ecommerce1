@@ -8,7 +8,7 @@
 </head>
 <body>
     <p>{{$data['body']}}</p>
-    <a href="{{$data['url']}}">Click here to Verify mail </a>
+    <a href="{{$data['url']}}">Click here to Verify your mail </a>
     <p>Thanks</p>
 
 </body>

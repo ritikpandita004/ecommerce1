@@ -96,7 +96,7 @@
                     <div class="card-body product-info">
                         <h5 class="card-title product-name">{{ $product->productname }}</h5>
                         <p class="card-text product-description">{{ $product->productdescription }}</p>
-                        <p class="card-text price">${{ $product->price }}</p>
+                        <p class="card-text price">{{ $product->price }}</p>
                         {{-- <form action="{{ route('storeCart') }}" method="post">
                             @csrf
                             <input type="hidden" name="p_id" value="{{ $product->id }}">
