@@ -128,7 +128,25 @@ class Admin extends Controller
     }
     public function StoreBrand(Request $request)
     {
-
+        $validatedData = Validator::make($request->all(), [
+            'brandName' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (is_numeric($value)) {
+                    $fail('The brand name should not be a number.');
+                }
+            }],
+            'cat' => 'required|exists:category,id',
+        ], [
+            'brandName.string' => 'The name must be a string.',
+            'brandName.required' => 'Please select a brand.',
+            'cat.required' => 'Please select a category.',
+            'cat.exists' => 'The selected category is invalid.',
+        ]);
+        
+        if ($validatedData->fails()) {
+            return redirect('/createbrand')
+                ->withErrors($validatedData)
+                ->withInput();
+        }
         //creting a object(brands) of a model (brand)
         $brands = new Brand;
         $brands->category = $request->cat;
@@ -209,7 +227,7 @@ class Admin extends Controller
                 $product->price = $request->price;
                
                 $product->save();
-                return redirect("/viewproducts");
+                return redirect("/viewproducts")->with('success', 'Product added successfully');;
             }
         } catch (\Throwable $th) {
             return redirect("/createproduct")->withErrors($th->getMessage());
@@ -233,6 +251,7 @@ class Admin extends Controller
         Session::flush();
         Redirect::back();
            Cache::flush();
-        return view("users/auth/login");
+           return redirect()->route('login')->with('success', 'Logout Successfull');;
     }
+    
 }

@@ -89,12 +89,12 @@ if (!empty($errors)) {
                 $users->save();
                 $this->sendEmailVerificationEmail($request->email, $uuid);
 
-                return redirect("/login");
+                return redirect("/login")->with('success', 'You have been successfully registered. Please verify your email to proceed');
             } else {
                 return redirect('/register')->withErrors("User already exist");
             }
         } catch (\Throwable $th) {
-            return redirect('/register')->withErrors($th->getMessage());
+            return redirect('/register')->withErrors('We are not able to send you the registration mail. As you are not registered with mailgun.');
         }
     }
 

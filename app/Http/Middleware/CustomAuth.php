@@ -16,27 +16,28 @@ class CustomAuth
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
-        $path = $request->path();
+     {
+    //     $path = $request->path();
     
-        if (Session::has('id') && $path == "login" && $path == "register" && $path == "adminlogin" ) {
+    //     if (Session::has('id') && $path == "login" && $path == "register" && $path == "adminlogin" ) {
             
-            return redirect()->route('welcome');;
-        }
-        if (!Session::has('id') && $path == "login" && $path == "register" && $path == "adminlogin" ) {
+    //         return redirect()->route('welcome');;
+    //     }
+    //     if (!Session::has('id') && $path == "login" && $path == "register" && $path == "adminlogin" ) {
             
-            return  $next($request);
-        }
-        if (!Session::has('id') && $path != "login" && $path != "register" && $path != "adminlogin" ) {
+    //         return  $next($request);
+    //     }
+    //     if (!Session::has('id') && $path != "login" && $path != "register" && $path != "adminlogin" ) {
             
-            return redirect()->route('welcome');
-        }
+    //         return redirect()->route('welcome');
+    //     }
       
-        $response = $next($request);
-        $response->headers->set('Cache-Control', 'nocache, no-store, max-age=0, must-revalidate');
-        $response->headers->set('Pragma', 'no-cache');
-        $response->headers->set('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
-        return $response;
+    //     $response = $next($request);
+    //     $response->headers->set('Cache-Control', 'nocache, no-store, max-age=0, must-revalidate');
+    //     $response->headers->set('Pragma', 'no-cache');
+    //     $response->headers->set('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+    //     return $response;
+        return  $next($request);
     }
     
 }

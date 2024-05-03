@@ -9,7 +9,7 @@ class UserRegister extends Model
 {
     use HasFactory;
     protected $table = 'user_register';
-    protected $primarykey = 'id';
+    protected $primarykey = 'email';
 
 
 

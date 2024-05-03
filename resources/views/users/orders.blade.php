@@ -91,6 +91,9 @@
             padding: 20px;
             border-radius: 8px;
             text-align: center;
+          
+        top: 50%;
+        left: 50%;
         }
     </style>
 </head>

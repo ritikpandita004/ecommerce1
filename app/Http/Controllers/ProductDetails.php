@@ -32,6 +32,27 @@ class ProductDetails extends Controller
     
     return view("users/Products/productDetails", compact('productDetails', 'productAlreadyAddedToCart'));
 }
+public function AdminproductDetailsForUser(Request $request)
+{
+    
+    $productDetails = products::where('id', $request->id)->get();
 
+
+    $productAlreadyAddedToCart = false;
+    if ($productDetails->isNotEmpty()) {
+        $productAlreadyAddedToCart = usercart::where('p_id', $productDetails[0]->id)
+                                          ->where('u_id', Session::get('id'))
+                                          ->exists();
+    }
+
+   
+    foreach ($productDetails as $items) {
+        $cat = Category::where('id',  $items->category)->get();
+        $items->c_name = $cat->isNotEmpty() ? $cat[0]->name : null;
+    }
+
+    
+    return view("admin/products/adminproductdetail", compact('productDetails', 'productAlreadyAddedToCart'));
+}
 
 }

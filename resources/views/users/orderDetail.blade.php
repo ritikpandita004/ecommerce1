@@ -56,7 +56,10 @@
         .order-details p {
             margin: 5px 0;
         }
-
+        .order-items tbody tr:hover {
+        background-color: lightgray; 
+       
+        }
         .order-items {
             margin-bottom: 20px;
         }
@@ -79,40 +82,39 @@
 
         .order-total {
             margin-top: 20px;
-            text-align: right; /* Align "Total Amount" to the right */
+            text-align: right; 
         }
 
-        /* Enlarge the slider arrows */
+        
         .carousel-control-prev,
         .carousel-control-next {
-            width: 40px; /* Adjust the width */
-            height: 40px; /* Adjust the height */
-            background: rgba(0, 0, 0, 0.5); /* Add background color */
-            border-radius: 50%; /* Make the arrows circular */
-            border: none; /* Remove default border */
-            font-size: 30px !important; /* Adjust the arrow size */
+            width: 40px; 
+            height: 40px; 
+            background: rgba(0, 0, 0, 0.5); 
+            border-radius: 50%; 
+            border: none; 
+            font-size: 30px !important; 
         }
 
         .carousel-control-prev-icon,
         .carousel-control-next-icon {
-            font-size: 20px; /* Adjust the arrow size */
-            color: #fff; /* Arrow color */
-            margin-top: 5px; /* Adjust vertical alignment */
+            font-size: 20px; 
+            color: #fff; 
         }
 
-        /* Increase the size of the carousel indicators */
+     
         .carousel-indicators {
-            bottom: 5px; /* Adjust the position from bottom */
+            bottom: 5px; 
         }
 
-        /* Remove underline from product name links */
+      
         .order-items a.order-item {
             text-decoration: none;
             color: #333;
             font-weight: bold;
         }
     </style>
-    <!-- Include the logged in navbar -->
+    
     @include('users/commons/loggedinnavbar')
 </head>
 <body>

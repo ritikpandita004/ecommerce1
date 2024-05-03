@@ -60,7 +60,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%; /* Ensure the card body fills the entire height */
+        height: 100%; 
     }
 
     .category-heading {
@@ -75,12 +75,12 @@
     .container {
         overflow-x: auto;
         white-space: nowrap;
-        display: flex; /* Use flexbox for the container */
+        display: flex;
     }
 
     .container .row {
-        margin-right: -15px; /* Remove right margin for the last row to avoid extra space */
-        margin-left: -15px; /* Remove left margin for the last row to avoid extra space */
+        margin-right: -15px; 
+        margin-left: -15px; 
     }
 </style>
 @csrf
@@ -93,7 +93,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$category->name}}</h5>
                 <p class="card-text">{{$category->categoryDescription}}</p>
-                <a href="{{ route('catproductview', ['category_id' => $category->id]) }}" class="btn btn-primary">Explore</a>
+                <a href="{{ route('admincatproductview', ['category_id' => $category->id]) }}" class="btn btn-primary">Explore</a>
             </div>
         </div>
     </div>

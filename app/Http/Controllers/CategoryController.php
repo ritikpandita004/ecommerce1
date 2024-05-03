@@ -14,6 +14,11 @@ public function showUserCatProduct(Request $request)
     $products = products::where('category',  $request->category_id)->get();
     return view ('users/Products/productCat', compact('products'));
 }
+public function AdminshowUserCatProduct(Request $request)
+{
 
+    $products = products::where('category',  $request->category_id)->get();
+    return view ('admin/products/categoryproduct', compact('products'));
+}
  
 }

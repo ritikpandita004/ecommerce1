@@ -51,6 +51,15 @@
 <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 150px);">
     <div class="card bg-white text-dark mt-5">
         <div class="card-body">
+            @if ($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
             <div class="brand-label">BRAND NAME</div>
             <form action="{{ route('StoreBrand') }}" method="POST">
                 @csrf

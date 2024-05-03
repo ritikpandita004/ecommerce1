@@ -42,7 +42,7 @@ class LoginController extends Controller
                 if ($user->is_email_verified == 1) {
                     $message = "Logged in successfully";
                     session(['id' => $user->id]);
-                    return redirect()->route('welcome')->with('message', $message);
+                    return redirect()->route('welcome')->with('success', 'Login Successfull');
                 } elseif ($user->is_email_verified == 0) {
                     $message = 'Please verify your email';
                     return view('users/auth/login', ['message' => $message]);

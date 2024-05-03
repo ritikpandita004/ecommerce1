@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductDetails;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Razorpay;
+use App\Http\Controllers\adminUpdate;
 use App\Http\Controllers\orders;
 use App\Http\Controllers\ShipmentShow;
 use Razorpay\Api\Product;
@@ -116,9 +117,11 @@ Route::group(['middleware'=>"web"],function(){
     
     Route::get('/login',[LoginController::class,'userLogin'])->name('login');
     Route::post('/login',[LoginController::class,'loginCheck'])->name('loginCheck');
-    Route::post('/forgotpassword',[ForgotPasswordController::class,'showLinkRequestForm'])->name('forgotpass');
-
-
+    Route::get('/resentpasswordlink',[ForgotPasswordController::class,'forgetPasswordShowForm'])->name('resentpasswordlink');
+    Route::get('/resetPassword/{token}',[ForgotPasswordController::class,'resetPasswordLoad'])->name('forgotpass');
+    Route::post('/resetPassword',[ForgotPasswordController::class,'resetPassword'])->name('resetPassword');
+    
+    Route::post('/changePassword',[ForgotPasswordController::class,'changePassword'])->name('changePassword');
     Route::get('/myprofile',[myProfile::class,'viewProfile'])->name('myProfile');
     Route::get('/updateView',[profileUpdation::class,'editProfile'])->name('updateView');
     Route::post('/updateProfile',[profileUpdation::class,'updateMyProfile'])->name('updateProfle');
@@ -166,11 +169,17 @@ Route::group(['middleware'=>"web"],function(){
     Route::get('/shipment',[Razorpay::class, 'shipmentOrderView' ])->name("shipmentview");
     Route::post('/shipmentstore',[Razorpay::class, 'shipmentOrderStore' ])->name("shipmentOrderStore");
     Route::get('/catproduct',[CategoryController::class, 'showUserCatProduct' ])->name("catproductview");
+    Route::get('/admincatproduct',[CategoryController::class, 'AdminshowUserCatProduct' ])->name("admincatproductview");
     Route::get('/orders',[orders::class, 'orderViewForUser' ])->name("orders");
     Route::get('/ordersdetails',[orders::class, 'orderDetails' ])->name("ordersdetails");
 
     Route::get('/queries',[QueryController::class, 'viewQueryInAdmin' ])->name("queries");
-    Route::get('/shipmentdetails',[ShipmentShow::class, 'shipmentShowToUser' ])->name("queries");
+    Route::post('/queriesstatus',[QueryController::class, 'updateStatus' ])->name("updateStatus");
+    Route::get('/shipmentdetails',[ShipmentShow::class, 'shipmentShowToUser' ]);
     Route::get('/productdetails',[orders::class, 'showProductAsPerId' ])->name("productdetails");
-    
+    Route::get('/productedit',[adminUpdate::class, 'productEdit' ])->name("productedit");
+    Route::post('/productupdate',[adminUpdate::class, 'productUpdate' ])->name("productupdate");
+    Route::get('/productdelete',[adminUpdate::class, 'productDelete' ])->name("productdelete");
+    Route::get('/adminproductdetails',[ProductDetails::class, 'AdminproductDetailsForUser' ])->name("adminproductdetails");
+     
 });

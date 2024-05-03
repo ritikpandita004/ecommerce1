@@ -1,85 +1,61 @@
-@include('users/commons/header')
-@include('users/commons/navbar')
-
-<style>
-   body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Font Awesome for the eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
             background-color: #fff !important; /* Set background color to white */
         }
         .error-message {
             color: red; /* Set color of error messages to red */
         }
+    </style>
+</head>
+<body>
 
-    /* Style for the eye icon */
-    .password-toggle {
-        cursor: pointer;
-    }
+@include('users/commons/navbar')
 
-    /* Style for the input group */
-    .input-group {
-        position: relative;
-    }
-
-    /* Style for the eye icon position */
-    .password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    z-index: 1; /* Add this line */
-}
-
-    .position-relative {
-    position: relative;
-}
-
-.position-absolute {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-}
-</style>
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6 login-container">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">
-                    <h3>LOGIN</h3>
-                </div>
+                <div class="card-header">Login</div>
                 <div class="card-body">
+                    @if(isset($message))
+                        <p class="error-message">{{ $message }}</p>
+                    @endif
                     <form method="POST" action="{{ route('loginCheck') }}">
                         @csrf
-                        @if(isset($message))
-                            <p class="error-message">{{ $message }}</p>
-                        @endif
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" @if(old('email')) value="{{ old('email') }}" @endif required>
+                            <input type="email" class="form-control mb-3" id="email" placeholder="Enter email" name="email" @if(old('email')) value="{{ old('email') }}" @endif required>
                         </div>
-                      
-                        <div class="form-group position-relative"> <!-- Add position-relative class here -->
+                        <div class="form-group">
                             <label for="password">Password</label>
-                            <div class="input-group">
+                            <div class="input-group mb-3">
                                 <input type="password" class="form-control" id="password" placeholder="Password" name="password" @if(old('password')) value="{{ old('password') }}" @endif required>
-                                <span class="input-group-text" id="togglePassword">
-                                    <i class="fas fa-eye-slash" onclick="togglePasswordVisibility()"></i>
-                                </span>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="togglePassword">
+                                        <i class="fas fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block mt-2">Login</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-2">Login</button>
                     </form>
-                    
-                    <a href="register" class="btn btn-primary btn-block mt-2">Register yourself</a>
-                    <a href="/adminlogin" class="btn btn-primary btn-block mt-2">Admin login</a>
-                    {{-- <a href="/adminlogin" class="btn btn-primary btn-block mt-2">Forgotpaswsword</a> --}}
+                    <a href="register" class="btn btn-primary btn-block mb-2">Register</a>
+                    <a href="/adminlogin" class="btn btn-primary btn-block mb-2">Admin login</a>
+                    <a href="/resentpasswordlink" class="btn btn-primary btn-block mb-2">Forget Password</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@include('users/commons/footer')
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -101,3 +77,6 @@
         }
     }
 </script>
+
+</body>
+</html>
