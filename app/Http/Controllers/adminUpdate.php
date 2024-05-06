@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\adminLLogin;
 use App\Models\products;
+
 use Illuminate\Support\Facades\Validator;
 class adminUpdate extends Controller
 {
@@ -65,26 +66,4 @@ public function productupdate(Request $request)
 }
     
 
-
-public function productDelete(Request $request)
-{
-   
-    $product = products::find($request->product_id);
-
-
-    if ($product) {
-       
-        $product->delete();
-        $data = products::all();
-
-       
-     
-        return redirect()->route('ViewProduct')->with('success', 'Product deleted successfully');
-      } else {
-          $data = products::all(); 
-          return redirect()->route('ViewProduct')->with('error', 'Product not found');
-      }
-
-
-  }
 }

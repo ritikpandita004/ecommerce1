@@ -50,18 +50,19 @@ class ForgotPasswordController extends Controller
                 'token' => $token,
             ]);
         }
-            return redirect("/login")->with('success', 'Password resent link sent');;
+            return redirect("/login")->with('message', 'Password resent link sent');
            }
            else
            {
-            return response()->json(['success'=>false,'msg'=>'user not found']);
+            return redirect()->back()->withErrors(['errors' => 'You are not a registered user.']);
+
            }
 
 
 
 
         } catch (\Exception $e) {
-           return response()->json(['success'=>false,'msg'=>"3121231212".$e->getMessage()]);
+            return redirect()->back()->withErrors(['errors' => 'You are not registered with mailgun.So we cannot send you the reset password email']);
         }
         
 }

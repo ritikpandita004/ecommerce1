@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" value="{{$data->phone_number}}" readonly>
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" value="{{$data->phone_number}}" readonly>
     </div>
     <div class="form-group">
         <label for="verification">Verification Status</label>

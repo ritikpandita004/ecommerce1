@@ -150,10 +150,10 @@
        <?php
           $dateTime = $orderItem['order']['created_at'];
           $date = date('Y-m-d', strtotime($dateTime));
-          $time = date('H:i:s', strtotime($dateTime));
+        
           
           echo "<p><strong>Order Date:</strong> $date</p>";
-          echo "<p><strong>Order Time:</strong> $time</p>";
+        
           ?></p>
             <p><strong>Name:</strong>
                 {{ $orderItem['shipment'][0]['name'] }}<br>

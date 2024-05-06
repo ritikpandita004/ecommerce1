@@ -64,9 +64,8 @@
             <!-- Replace "ekart-logo.png" with your actual logo path -->
         </div>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/aboutus">About</a></li>
-            <li><a href="/contactus">Contact</a></li>
+            
+           
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
         

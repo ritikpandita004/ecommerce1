@@ -59,12 +59,24 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        .error-message {
+            color: red; /* Set color of error messages to red */
+        }
     </style>
 </head>
 <body>
 
 <div class="form-container">
     <h2>Password Reset</h2>
+    @if ($errors->any())
+    <div class="alert alert-danger error-message">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="POST" action="{{ route('resetPassword') }}">
         @csrf
 

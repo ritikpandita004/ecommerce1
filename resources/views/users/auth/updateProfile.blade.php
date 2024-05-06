@@ -50,6 +50,9 @@
     .form-container {
         margin: 20px;
     }
+    .error-message {
+            color: red; /* Set color of error messages to red */
+        }
 </style>
 
 <div class="container">
@@ -59,6 +62,16 @@
                 <div class="card-header">{{ __('UPDATE YOUR PROFILE') }}</div>
 
                 <div class="card-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                     <form action="{{ route('updateProfle') }}" method="POST">
                         @csrf
 

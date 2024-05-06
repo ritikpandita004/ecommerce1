@@ -145,14 +145,14 @@
                 }
             });
     
-            // Function to refresh the page
+          
             function refreshPage() {
                 location.reload();
             }
     
-            // Add an event listener to the "Add to Cart" button
+           
             $('.add-to-cart-btn').click(function() {
-                // Execute refreshPage function after a slight delay (to ensure cart is updated before refreshing)
+               
                 setTimeout(refreshPage, 500);
             });
         });

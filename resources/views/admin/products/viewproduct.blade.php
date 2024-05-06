@@ -58,29 +58,26 @@
         margin-bottom: 30px;
     }
     
-    .product-links {
-        display: flex; /* Changed to flex to align links horizontally */
-        justify-content: space-around; /* Added to evenly space the links */
-        width: 100%; /* Added to ensure links take full width */
-        margin-top: auto; /* Added to push links to the bottom of the card */
-    }
-
+    
     .product-links > a {
-        padding: 8px 16px;
-        margin: 0 5px; /* Added margin between buttons */
-        background-color: #ff5733;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        list-style-type: none; /* Remove default list style */
-        border: none; /* Remove default border */
-        outline: none; /* Remove default outline */
-    }
+    display: block; /* Change display property to block */
+    width: 100px; /* Set a fixed width for the link */
+    margin: 0 auto; /* Center the link horizontally */
+    padding: 8px 16px;
+    margin-top: 10px; /* Add some top margin for spacing */
+    background-color: #ff5733;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    list-style-type: none; /* Remove default list style */
+    border: none; /* Remove default border */
+    outline: none; /* Remove default outline */
+}
 
-    .product-links > a:hover {
-        background-color: #e84545;
-    }
+.product-links > a:hover {
+    background-color: #e84545;
+}
 
     /* Center align the alert message */
     .alert {
@@ -114,7 +111,7 @@
                             <p class="product-price">Price: {{ $product->price }}</p>
                             <div class="product-links">
                                 <a href="{{ route('productedit', ['product_id' => $product->id]) }}">Edit</a>
-                                <a href="{{ route('productdelete', ['product_id' => $product->id]) }}">Delete</a>
+                              
                             </div>
                         </div>
                     </div>
