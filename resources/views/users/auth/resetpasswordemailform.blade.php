@@ -1,5 +1,3 @@
-<!-- resources/views/reset-password.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,73 +13,75 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: white;
+            font-family: Arial, sans-serif;
         }
         .form-container {
-            max-width: 600px; /* Adjust max-width as needed */
-            margin: 0 auto;
-            padding: 40px; /* Increase padding for a larger form */
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            max-width: 400px; /* Adjust max-width as needed */
+            width: 90%; /* Use percentage for responsiveness */
+            padding: 20px; /* Adjust padding for a smaller form */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add a subtle box-shadow for depth */
         }
-
         /* Style for form inputs */
         .form-group {
             margin-bottom: 20px; /* Increase margin for more spacing */
         }
-
         label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px; /* Adjust spacing between label and input */
+            color: #212121; /* Set label color to a dark shade */
         }
-
         input[type="email"] {
-            width: 100%;
+            width: calc(100% - 24px); /* Subtract padding and border width from the width */
             padding: 12px; /* Increase padding for larger input fields */
-            border: 1px solid #ccc;
+            border: 1px solid #bdbdbd; /* Use a light gray border */
             border-radius: 5px;
             font-size: 16px; /* Increase font size for better readability */
+            color: #212121; /* Set input text color to a dark shade */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
-
         button[type="submit"] {
             display: block;
-            width: 100%;
+            width: calc(100% - 24px);
             padding: 12px; /* Increase padding for larger button */
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
+            background-color: #ff9f00; /* Flipkart's secondary color */
             color: #fff;
             cursor: pointer;
             font-size: 16px; /* Increase font size for larger button */
+            text-transform: uppercase; /* Convert text to uppercase */
         }
-
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #f90; /* Darken the button color on hover */
         }
         .error-message {
             color: red; /* Set color of error messages to red */
+            margin-top: 10px; /* Add some space above the error messages */
         }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>Password Reset</h2>
+    <h2 style="text-align: center; color: #ff9f00;">Forgot Password?</h2>
     @if ($errors->any())
-    <div class="alert alert-danger error-message">
+    <div class="error-message">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
     <form method="POST" action="{{ route('resetPassword') }}">
         @csrf
 
         @if (session('status'))
-            <div>{{ session('status') }}</div>
+            <div style="color: #388e3c;">{{ session('status') }}</div>
         @endif
 
         <div class="form-group">

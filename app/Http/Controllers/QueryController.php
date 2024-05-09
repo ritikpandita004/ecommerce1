@@ -49,7 +49,7 @@ public function updateStatus(Request $request)
         try {
         $request->validate([
             'query_id' => 'required|exists:queries,id',
-            'status' => 'required|in:resolved,onHold',
+            'status' => 'required|in:resolved,inProcess',
         ]);
 
         $query = queries::findOrFail($request->query_id);

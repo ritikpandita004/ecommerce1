@@ -3,52 +3,68 @@
 
 <style>
    
-    body {
-        background-color: #fff;
+   body {
+        background-color: #fff; /* Set background color of the body to white */
+    }
+
+    .sales-heading {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-size: 40px;
+        color: #007bff; /* Blue color */
     }
 
     .custom-card {
-        width: 100%;
-        max-width: 220px;
-        height: 100%; /* Changed height to 100% to ensure cards are of equal height */
-        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-between; /* Added to vertically center the content */
-        border: 1px solid #ccc; /* Added border for visual separation */
-        border-radius: 10px; /* Added border radius for card corners */
-        padding: 10px; /* Added padding for spacing */
+    }
+
+    .custom-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-top {
+        height: 200px; /* Set a fixed height for the images */
+        object-fit: contain; /* Ensure the image fits within the container */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin: 10px auto 0; /* Center the image horizontally and add margin from top */
+        display: block;
     }
 
     .product-info {
-        padding: 15px;
         text-align: center;
+        padding: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .product-name {
         font-size: 18px;
         font-weight: bold;
-        margin-bottom: 5px;
-        color: black; 
+        margin-bottom: 10px;
+        color: #333;
     }
 
     .product-description {
         font-size: 14px;
+        color: #666;
         margin-bottom: 10px;
-        max-height: 60px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        display: -webkit-box;
-        color: black; 
     }
 
-    .product-price {
+    .price {
         font-size: 16px;
         font-weight: bold;
-        color: #ff5733;
+        color: #007bff;
+        margin-bottom: 10px;
     }
 
     .sales-heading {

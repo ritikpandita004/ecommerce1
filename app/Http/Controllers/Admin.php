@@ -55,18 +55,10 @@ class Admin extends Controller
         }
     }
     
-
-
-
-    
-
-
     public function createCategory()
     {
         return view("admin/categories/createCategory");
     }
-
-
 
     public function storeCategory(Request $request)
     {
@@ -154,9 +146,6 @@ class Admin extends Controller
         $brands->save();
         return view("admin/homepage");
     }
-
-
-
     public function CreateProduct()
     {
         $categories = DB::table('category')->orderBy('name', 'ASC')->get();
@@ -191,7 +180,7 @@ class Admin extends Controller
                 'price' => 'required|numeric|min:1',
             ], [
                 'productName.required' => 'Please enter the product name.',
-                // 'productName.regex' => 'The product name must not contain numbers.',
+                
                 'productName.max' => 'The product name must not exceed 255 characters.',
                 'category.required' => 'Please select a category.',
                 'category.exists' => 'The selected category is invalid.',
@@ -239,6 +228,8 @@ class Admin extends Controller
         $data = products::all();
         return view("admin/products/viewproduct", compact('data'));
     }
+
+
 
     public function home()
     {

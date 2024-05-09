@@ -16,6 +16,7 @@ use App\Http\Controllers\adminUpdate;
 use App\Http\Controllers\orders;
 use App\Http\Controllers\ShipmentShow;
 use Razorpay\Api\Product;
+use App\Http\Controllers\NonRegisterUserProducts;
 
 // Route::get('/', function () {
 //     return view('welcome'); 
@@ -301,7 +302,13 @@ Route::middleware(['web', 'ispublic'])->group(function () {
     Route::get('/resetPassword/{token}',[ForgotPasswordController::class,'resetPasswordLoad'])->name('forgotpass');
     Route::post('/resetPassword',[ForgotPasswordController::class,'resetPassword'])->name('resetPassword');
    
-
+    Route::get('/registerhomepage', function () {
+        return view('registerhomepage'); 
+    })->name('registerhomepage');
+     
+    Route::get('/productswithoutauth',[NonRegisterUserProducts::class,'ViewProductWithOutRegister'])->name('productswithoutauth');
+    Route::get('/productsdetailswithoutauth',[NonRegisterUserProducts::class,'productDetailsForUser'])->name('productsdetailswithoutauth');
+   
 });
 
 

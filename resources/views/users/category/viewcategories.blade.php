@@ -12,18 +12,15 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease;
         background-color: #fff;
-        width: 25%; /* Set width for each card to 25% */
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        width: 100%; /* Set width for each card to 100% */
+        margin-bottom: 20px; /* Add margin between cards */
     }
 
     .card-img-top {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         height: 200px;
-        object-fit: contain;
+        object-fit: cover; /* Change to cover for better image scaling */
         margin: auto;
         display: block;
     }
@@ -38,8 +35,6 @@
     .card-text {
         color: #666;
         margin-bottom: 15px;
-        height: 80px; /* Limit the height of the description */
-        overflow: hidden; /* Hide overflow */
     }
 
     .btn-primary {
@@ -58,10 +53,6 @@
 
     .card-body {
         padding: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%; /* Ensure the card body fills the entire height */
     }
 
     .category-heading {
@@ -74,14 +65,24 @@
     }
 
     .container {
-        overflow-x: auto;
-        white-space: nowrap;
-        display: flex; /* Use flexbox for the container */
+        padding: 0 15px; /* Add padding to the container */
     }
 
     .container .row {
-        margin-right: -15px; /* Remove right margin for the last row to avoid extra space */
-        margin-left: -15px; /* Remove left margin for the last row to avoid extra space */
+        display: flex;
+        flex-wrap: wrap; /* Ensure cards wrap to the next line on small screens */
+        margin: 0 -10px; /* Add negative margin to compensate for padding */
+    }
+
+    .card {
+        flex: 0 0 calc(50% - 20px); /* Show two cards per row on small screens */
+        margin: 0 10px; /* Add margin between cards */
+    }
+
+    @media (min-width: 768px) {
+        .card {
+            flex: 0 0 calc(25% - 20px); /* Show four cards per row on larger screens */
+        }
     }
 </style>
 

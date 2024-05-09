@@ -8,69 +8,69 @@
     <!-- Link Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
      <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #1f1f1f; /* Light black background */
-            font-family: Arial, sans-serif;
-        }
+     body {
+    margin: 0;
+    padding: 0;
+    background-color: #1f1f1f; /* Light black background */
+    font-family: Arial, sans-serif;
+}
 
-        .navbar {
-            background-color: #000; /* Dark black navbar */
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.navbar {
+    background-color: #000; /* Dark black navbar */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .navbar-logo {
-            display: flex;
-            align-items: center;
-        }
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
 
-        .navbar-logo img {
-            height: 30px; /* Adjust logo height as needed */
-            margin-right: 10px;
-        }
+.navbar-logo img {
+    height: 30px; /* Adjust logo height as needed */
+    margin-right: 10px;
+}
 
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
 
-        .navbar ul li {
-            display: inline;
-        }
+.navbar ul li {
+    display: inline;
+}
 
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-        }
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
 
-        .navbar ul li a:hover {
-            background-color: #333;
-        }
+.navbar ul li a:hover {
+    background-color: #333;
+}
 
-        /* Dropdown Styles */
-        .profile-dropdown {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            margin-right: 20px;
-        }
+/* Dropdown Styles */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 20px;
+}
 
-        .profile-icon {
-            font-size: 24px;
-            color: white; /* Human icon color set to white */
-            border-radius: 50%; /* Make it a circle */
-            background-color:black; /* Background color behind the icon */
-            padding: 10px; /* Adjust padding */
-        }
+.profile-icon {
+    font-size: 24px;
+    color: white; /* Human icon color set to white */
+    border-radius: 50%; /* Make it a circle */
+    background-color:black; /* Background color behind the icon */
+    padding: 10px; /* Adjust padding */
+}
 
-        .profile-dropdown-content {
+.profile-dropdown-content {
     display: none;
     position: absolute;
     background-color: #333;
@@ -82,20 +82,46 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-        .profile-dropdown:hover .profile-dropdown-content {
-            display: block;
-        }
+.profile-dropdown:hover .profile-dropdown-content {
+    display: block;
+}
 
-        .profile-dropdown-content a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-        }
+.profile-dropdown-content a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+}
 
-        .profile-dropdown-content a:hover {
-            background-color: #555;
-        }
+.profile-dropdown-content a:hover {
+    background-color: #555;
+}
+
+/* Media Queries for Responsive Design */
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar ul {
+        margin-top: 20px;
+    }
+
+    .navbar ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .profile-dropdown {
+        margin-right: 0;
+        margin-top: 20px;
+    }
+
+    .profile-dropdown-content {
+        top: calc(100% + 20px);
+    }
+}
     </style>
 </head>
 <body>

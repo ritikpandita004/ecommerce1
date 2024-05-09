@@ -11,19 +11,22 @@
     .alert {
         text-align: center; /* Center the text within the alert */
     }
-
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-        .background-image-container {
-            height: 50vh; /* Adjust height for smaller screens */
-        }
-    }
 </style>
 
+@if ($errors->any())
+    <div id="error-message" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @if(session('success'))
-<div id="success-message" class="alert alert-success" role="alert">
-    {{ session('success') }}
-</div>
+    <div id="success-message" class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
 @endif
 
 <div class="background-image-container" style="background-image: url('image/4-1.jpg'); height: 100vh; background-size: cover; background-position: center;">
@@ -32,20 +35,23 @@
 @include('users/commons/footer')
 
 <script>
+    // Function to remove the error messages after 2 seconds
+    setTimeout(function() {
+        var errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 2000);
+
+    // Function to remove the success message after 5 seconds
     setTimeout(function() {
         var successMessage = document.getElementById('success-message');
         if (successMessage) {
             successMessage.style.display = 'none';
         }
-    }, 2000); 
+    }, 5000);
 </script>
-
-
-
  --}}
-
-
-
 
 
  <!doctype html>
@@ -61,21 +67,13 @@
     body{
         background-color: #f4f4f4 !important;
     }
-    .alert {
-        text-align: center; /* Center the text within the alert */
-    }
  </style>
  <body>
  
- @include('users/commons/loggedinnavbar')
+ @include('users/commons/navbar')
  
  <!-- slider -->
  
-@if(session('success'))
-<div id="success-message" class="alert alert-success" role="alert">
-    {{ session('success') }}
-</div>
-@endif
  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
    <div class="carousel-indicators">
      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -150,7 +148,7 @@
  
    <div class="row justify-content-evenly pt-3 pb-5">
      <div class="col-md-5 mt-5 pt-3">
-       <img src="image/pre.jpeg" class="img-fluid rounded-circle" style="max-width: 100%; max-height: 300px; " alt="">
+       <img src="image/pre.jpeg" class="img-fluid rounded-circle" style="max-width: 100%; max-height: 300px;" alt="">
  
  
      </div>
@@ -210,11 +208,9 @@
            </div>
          </div>
          
-         <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-3 text-center">Submit</button>
-         </div> 
          
          
+         <button type="submit" class="btn btn-primary mt-3 ">Submit</button>
        </form>
  
  
@@ -309,8 +305,7 @@
   
    <div class="col-md-3 pt-4">
      <h3>About us</h3>
-     <p>
-        At Ekart Ecommerce, we're passionate about revolutionizing the way you shop online. Founded on the principle of delivering convenience, quality, and reliability, Ekart Ecommerce strives to be your ultimate destination for all your shopping needs. </p>
+     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi possimus quisquam eum mollitia aliquid nihil vel repudiandae sunt at odit.</p>
  
    </div>
  
@@ -346,14 +341,6 @@
 
         return isValid; // Return the overall form validity
     }
-</script>
-<script>
-    setTimeout(function() {
-        var successMessage = document.getElementById('success-message');
-        if (successMessage) {
-            successMessage.style.display = 'none';
-        }
-    }, 2000); 
 </script>
  </body>
  </html> 

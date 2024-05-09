@@ -1,5 +1,5 @@
 @include('users/commons/header')
-@include('users/commons/loggedinnavbar')
+@include('users/commons/navbar')
 <style>
     body {
         background-color: #fff; /* Set background color of the body to white */
@@ -90,18 +90,14 @@
         @foreach ($data as $product)
         <div class="col-md-3 mb-4">
             
-            <a href="{{ route('userProductDetail', ['id' => $product->id]) }}" class="product-link" style="text-decoration: none;"> 
+            <a href="{{ route('productsdetailswithoutauth', ['id' => $product->id]) }}" class="product-link" style="text-decoration: none;"> 
                 <div class="card custom-card">
                     <img src="{{ asset($product->image) }}" class="card-img-top" alt="{{ $product->name }}">
                     <div class="card-body product-info">
                         <h5 class="card-title product-name">{{ $product->productname }}</h5>
                         <p class="card-text product-description">{{ $product->productdescription }}</p>
                         <p class="card-text price">₹{{ $product->price }}</p>
-                        {{-- <form action="{{ route('storeCart') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="p_id" value="{{ $product->id }}">
-                            <button type="submit" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
-                        </form> --}}
+                        
                     </div>
                 </div>
             </a>

@@ -19,7 +19,7 @@
         border-radius: 10px;
         transition: box-shadow 0.3s ease;
         margin-bottom: 20px;
-        width: 300px; /* Set a fixed width for each card */
+        width: calc(25% - 20px); /* Set a width for each card with 20px padding on each side */
     }
 
     .custom-card:hover {
@@ -27,11 +27,11 @@
     }
 
     .card-img-top {
-    height: 200px;
-    object-fit: contain; /* Center-fit the image within its container */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
+        height: 200px;
+        object-fit: contain; /* Center-fit the image within its container */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
 
     .product-info {
         padding: 20px;
@@ -78,7 +78,7 @@
         display: flex;
         flex-wrap: wrap; /* Allow cards to wrap to the next line if needed */
         justify-content: space-between; /* Distribute space between cards */
-        padding: 0 20px; /* Add some padding to the sides */
+        padding: 0 10px; /* Add some padding to the sides */
     }
 </style>
 
@@ -87,16 +87,16 @@
     @foreach ($products as $item)
     <div class="card custom-card">
         {{-- <a href="{{ route('userProductDetail', ['id' => $item->id]) }}" class="product-link" style="text-decoration: none;">  --}}
-            <img src="{{ asset($item->image) }}" class="card-img-top" alt="{{ $item->name }}">
-            <div class="product-info">
-                <h5 class="product-name">{{ $item->productname }}</h5>
-                <p class="product-description">{{ $item->productdescription }}</p>
-                <p class="price"><strong>Price:</strong> ${{ $item->price }}</p>
-            </div>
+        <img src="{{ asset($item->image) }}" class="card-img-top" alt="{{ $item->name }}">
+        <div class="product-info">
+            <h5 class="product-name">{{ $item->productname }}</h5>
+            <p class="product-description">{{ $item->productdescription }}</p>
+            <p class="price"><strong>Price:</strong> ${{ $item->price }}</p>
+        </div>
         {{-- </a> --}}
-       
+
     </div>
-    
+
     @endforeach
 </div>
 @include('admin/commons/footer')

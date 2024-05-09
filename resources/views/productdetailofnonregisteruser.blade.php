@@ -102,7 +102,7 @@
             margin-right: 0; /* Remove margin-right for the last button */
         }
     </style>
-    @include('users/commons/loggedinnavbar')
+    @include('users/commons/navbar')
 </head>
 <body>
     <div class="container">
